@@ -6,13 +6,13 @@
  * @args: args
  * Return: the number of digit
 */
-int print_int(va_list args)
+int print_int(va_list l)
 {
 	int size = 0, num;
 	unsigned int number;
 	char c;
 
-	num = va_arg(args, int);
+	num = va_arg(l, int);
 	if (num < 0)
 	{
 		c = '-';
