@@ -20,7 +20,9 @@ typedef struct specifier
 int print_char(va_list l );
 int print_string(va_list l);
 int _printf(const char *format, ...);
-int print_int(va_list args);
+int print_int(va_list l);
 int _putchar(char c);
 int print_percent(va_list l);
+int print_binary(va_list l);
+int is_spec(specifier_t spacifiers[], char *format);
 #endif

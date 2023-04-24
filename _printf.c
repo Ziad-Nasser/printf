@@ -1,79 +1,70 @@
+#include <unistd.h>
+#include <string.h>
 #include "main.h"
-
 /**
  * is_spec - checks if a character is a format specifier
  * @spacifiers: an array of specifier_t structs
- * @l: a va_list
- *
+ * @format: p to arr
  * Return: the index of the specifier if found, or -2 if not found
  */
 int is_spec(specifier_t spacifiers[], char *format)
 {
-	int i = 0;
+	int i;
 	char ch;
 
+	i = 0;
 	if (format[i] == '%')
 	{
 		if (format[i + 1] == '\0')
-			return (-1); /* error */
-
+			return (-1);
 		ch = format[i + 1];
+		/*to select spacifier*/
 		for (i = 0; i < 10; i++)
 		{
 			if (spacifiers[i].s == ch)
 				return (i);
 		}
 	}
-
-	/* not found */
+	/*not found*/
 	return (-2);
 }
-
 /**
- * _printf - prints formatted output to stdout
- * @format: a string containing zero or more format specifiers
- * Return: the number of characters printed, or -1 on error
+ *_printf - a function to print a string using a format
+ *@format: pointer to an array containing the string of chars to be handled
+ *Return: count or error upon failing (-1)
  */
 int _printf(const char *format, ...)
 {
+	int i, s_input, print_count = 0;
 	va_list l;
-	int s_input, write_count = 0;
-	char *p;
-
 	specifier_t spacifiers[] = {
-		{'s', print_string},
-		{'c', print_char},
-		{'%', print_percent},
-		{'d', print_int},
-		{'i', print_int},
-		{NULL, NULL}
-	};
-	va_start(l, format);
-	if (!format || (format[0] == '%' && !format[1])
-			|| (format[0] == '%' && format[1] == ' ' && !format[2]))
-		return (-1);
-	for (p = format; *p; p++)
-	{
-		if (*p == '%')
-		{
-			s_input = is_spec(spacifiers, l);
-			if (s_input == -2)
-			{
-				write(STDOUT_FILENO, p + 1, 1);
-				write_count++;
-			}
-			else if (s_input == -1)
-				return (-1);
+	{'s', print_string}, {'c', print_char}, {'%', print_percent}
+	, {'d', print_int}, {'i', print_int}, {'b', print_binary}
+	, {NULL, NULL}};
 
-			else
-				write_count += spacifiers[s_input].f(l);
+	if (format == NULL)
+		return (-1);
+
+	va_start(l, format);
+	for (i = 0; (format != NULL) && (format[i] != '\0'); i++)
+	{
+		s_input = is_specifier(spacifiers, (char *) (format + i));
+
+		if (s_input == -2)
+		{
+			write(STDOUT_FILENO, (char *) (format + i), 1);
+			print_count++;
+		}
+		else if (s_input == -1)
+		{
+			return (-1);
 		}
 		else
 		{
-			write(STDOUT_FILENO, p, 1);
-			write_count++;
+			print_count = print_count + spacifiers[s_input].f(l);
+			i++;
 		}
 	}
 	va_end(l);
-	return (write_count);
+return (print_count);
 }

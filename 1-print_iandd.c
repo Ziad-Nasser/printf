@@ -3,7 +3,7 @@
 #include <stdarg.h>
 /**
  * print_int - function that prints integer number
- * @args: args
+ * @l: args
  * Return: the number of digit
 */
 int print_int(va_list l)
