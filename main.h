@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-
-=======
 #ifndef MAIN_H
 #define MAIN_H
 #include <stdarg.h>
@@ -24,5 +21,5 @@ int print_char(va_list l );
 int print_string(va_list l);
 int _printf(const char *format, ...);
 int print_int(va_list args);
+int _putchar(char c);
 #endif
->>>>>>> 8b59da92af35a5a6005d8a9ff3c5f27d943c7ef6
