@@ -7,7 +7,7 @@
  *
  * Return: the index of the specifier if found, or -2 if not found
  */
-int is_spec(specifier_t spacifiers[], va_list l)
+int is_spec(specifier_t spacifiers[], char *format)
 {
 	int i = 0;
 	char ch;
@@ -20,7 +20,7 @@ int is_spec(specifier_t spacifiers[], va_list l)
 		ch = format[i + 1];
 		for (i = 0; i < 10; i++)
 		{
-			if (spacifiers[i].specifier[0] == ch)
+			if (spacifiers[i].s == ch)
 				return (i);
 		}
 	}
