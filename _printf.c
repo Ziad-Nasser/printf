@@ -15,7 +15,7 @@ int print_string(va_list l)
 	if (str == NULL)
 		str = "(null)";
 	len = strlen(str);
-	print(STDOUT_FILENO, str, len);
+	write(STDOUT_FILENO, str, len);
 
 	return (len);
 }
@@ -93,7 +93,7 @@ int _printf(const char *format, ...)
 	print_count = 0;
 	for (i = 0; (format != NULL) && (format[i] != '\0'); i++)
 	{
-		s_input = is_specifier(spacifiers, (char *) (format + i));
+		s_input = is_spec(spacifiers, (char *) (format + i));
 
 		if (s_input == -2)
 		{

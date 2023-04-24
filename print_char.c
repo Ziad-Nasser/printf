@@ -8,13 +8,10 @@
  */
 int print_char(va_list l)
 {
-	char *c;
+	char c;
 
-	c = va_arg(l, char *);
-
-	if (!c)
-		return (NULL);
-
+	c = (char) va_arg(l, int);
 	write(STDOUT_FILENO, &c, 1);
-	return (putchar(*c));
+
+	return (1);
 }
