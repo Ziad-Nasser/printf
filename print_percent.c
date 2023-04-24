@@ -4,7 +4,7 @@
  * @l: va_list
  * Return: 1.
  */
-int print_pcent(va_list l)
+int print_percent(va_list l)
 {
 	if (l)
 	{
