@@ -1,6 +1,35 @@
 #include "main.h"
 
 /**
+ * is_spec - checks if a character is a format specifier
+ * @spacifiers: an array of specifier_t structs
+ * @l: a va_list
+ *
+ * Return: the index of the specifier if found, or -2 if not found
+ */
+int is_spec(specifier_t spacifiers[], va_list l)
+{
+	int i = 0;
+	char ch;
+
+	if (format[i] == '%')
+	{
+		if (format[i + 1] == '\0')
+			return (-1); /* error */
+
+		ch = format[i + 1];
+		for (i = 0; i < 10; i++)
+		{
+			if (spacifiers[i].specifier[0] == ch)
+				return (i);
+		}
+	}
+
+	/* not found */
+	return (-2);
+}
+
+/**
  * _printf - prints formatted output to stdout
  * @format: a string containing zero or more format specifiers
  * Return: the number of characters printed, or -1 on error
