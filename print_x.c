@@ -6,7 +6,7 @@
  * @ap: variadic argument
  * Return: integer
  */
-int print_hex(va_list ap)
+int print_hex(va_list l)
 {
 	unsigned int i[8];
 	unsigned int j, m = 268435456, n, res = 0;
