@@ -31,7 +31,7 @@ int print_hex(va_list ap)
 			else
 				_putchar('0' + diff + i[j]);
 			count++;
-		}
+		
 	}	
 	return (count);
 }
