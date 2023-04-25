@@ -18,6 +18,8 @@ typedef struct specifier
 	int (*f)(va_list args);
 } specifier_t;
 int _printf(const char *format, ...);
+int is_spec(specifier_t spacifiers[], char *format);
+int print_spec(va_list l);
 int print_int(va_list l);
 int print_binary(va_list l);
 int _putchar(char c);
