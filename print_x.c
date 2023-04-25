@@ -33,5 +33,5 @@ int print_hex(va_list ap)
 			count++;
 		}
 	}
-	return (count);
-
+	eturn (count);
+}
