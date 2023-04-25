@@ -13,7 +13,7 @@ int print_hex(va_list l)
 	char diff;
 	int count = 0;
 
-	n = va_arg(ap, unsigned int);
+	n = va_arg(l, unsigned int);
 	diff = 'a' - ':';
 	i[0] = n / m;
 	for (j = 1; j < 8; j++)
