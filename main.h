@@ -23,4 +23,5 @@ int print_spec(va_list l);
 int print_int(va_list l);
 int print_binary(va_list l);
 int _putchar(char c);
+int print_reverse(va_list l);
 #endif

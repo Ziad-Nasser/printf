@@ -1,26 +1,33 @@
 #include "main.h"
 /**
- * print_binary - converts a number from decimal to binary
- * @l: unsigned integer to convert
+ * print_binary - print binary
+ * @l: args
  * Return: integer
  */
 int print_binary(va_list l)
 {
-	unsigned int num;
-	unsigned int binary[32];
-	int j, i = 0, count = 0, res = 0;
+	unsigned int num, max, i, sum;
+	unsigned int a[32];
+	int count;
 
 	num = va_arg(l, unsigned int);
-	while (num > 0)
+	max = 2147483648; /* (2 ^ 31) */
+	a[0] = num / max;
+	for (i = 1; i < 32; i++)
 	{
-		binary[i] = num % 2;
-		num = num / 2;
-		i++;
+		max /= 2;
+		a[i] = (num / max) % 2;
 	}
-	for (j = i - 1; j >= 0; j--)
+	for (i = 0, sum = 0, count = 0; i < 32; i++)
 	{
-		res = _putchar('0' + binary[j]);
-		count = count + res;
+		sum += a[i];
+		if (sum || i == 31)
+		{
+			char z = '0' + a[i];
+
+			write(1, &z, 1);
+			count++;
+		}
 	}
 	return (count);
 }

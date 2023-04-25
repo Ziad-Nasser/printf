@@ -47,7 +47,8 @@ int _printf(const char *format, ...)
 	specifier_t spacifiers[] = {
 	  {'s', print_string}, {'c', print_char}
 	, {'%', print_spec}, {'d', print_int}
-	, {'i', print_int}, {'b', print_binary}};
+	, {'i', print_int}, {'b', print_binary}
+	, {'r', print_reverse}};
 
 	if (format == NULL)
 		return (-1);
