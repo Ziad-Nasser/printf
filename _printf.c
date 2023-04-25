@@ -2,7 +2,7 @@
 #include <unistd.h>
 #include "main.h"
 /**
-*write_string - function that prints a string
+*print_string - function that prints a string
  *@l: args
  *Return: the number of characters
 */
@@ -46,8 +46,8 @@ int print_spec(va_list l)
 	return (1);
 }
 /**
-*is_spec - function checks a spec
- *@spac: array of specifiers
+ * is_spec - function checks a spec
+ *@spacifiers: array of specifiers
  *@format: pointer to an array
  *Return: -1 or i
 */
