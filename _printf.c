@@ -1,10 +1,10 @@
-#include "main.h"
 #include <string.h>
 #include <unistd.h>
+#include "main.h"
 /**
-*print_string - a function that writes a string to the standard output
- *@l:variadic arguments
- *Return:the number of characters printed
+*write_string - function that prints a string
+ *@l: args
+ *Return: the number of characters
 */
 int print_string(va_list l)
 {
@@ -20,9 +20,9 @@ int print_string(va_list l)
 	return (len);
 }
 /**
- *print_char - a function that writes a char to the standard output
- *@l:variadic arguments
- *Return:the number of characters printed
+ *print_char - function that prints a char
+ *@l: args
+ *Return: the number of characters
 */
 int print_char(va_list l)
 {
@@ -34,11 +34,11 @@ int print_char(va_list l)
 	return (1);
 }
 /**
- *print_specifier - a function that writes a specifier to the standard output
- *@l:variadic arguments
- *Return:the number of characters printed
+ *print_spec - function that prints a specifier
+ *@l: args
+ *Return:the number of characters
 */
-int print_specifier(va_list l)
+int print_spec(va_list l)
 {
 	(void) l;
 	write(STDOUT_FILENO, "%", 1);
@@ -46,11 +46,11 @@ int print_specifier(va_list l)
 	return (1);
 }
 /**
- * is_spec - checks if a character is a format specifier
- * @spacifiers: an array of specifier_t structs
- * @format: p to arr
- * Return: the index of the specifier if found, or -2 if not found
- */
+*is_spec - function checks a spec
+ *@spac: array of specifiers
+ *@format: pointer to an array
+ *Return: -1 or i
+*/
 int is_spec(specifier_t spacifiers[], char *format)
 {
 	int i;
@@ -63,7 +63,7 @@ int is_spec(specifier_t spacifiers[], char *format)
 			return (-1);
 		ch = format[i + 1];
 
-		for (i = 0; i < 12; i++)
+		for (i = 0; i < 14; i++)
 		{
 			if (spacifiers[i].s == ch)
 				return (i);
@@ -73,17 +73,18 @@ int is_spec(specifier_t spacifiers[], char *format)
 	return (-2);
 }
 /**
- *_printf - a function to print a string using a format
- *@format: pointer to an array containing the string of chars to be handled
- *Return: count or error upon failing (-1)
+ *_printf - print function
+ *@format: pointer to an array
+ *Return: count or -1
  */
 int _printf(const char *format, ...)
 {
-	int i, s_input, print_count;
+	int i, s_index, print_count;
 	va_list l;
+
 	specifier_t spacifiers[] = {
 	  {'s', print_string}, {'c', print_char}
-	, {'%', print_specifier}, {'d', print_int}
+	, {'%', print_spec}, {'d', print_int}
 	, {'i', print_int}, {'b', print_binary}};
 
 	if (format == NULL)
@@ -93,20 +94,20 @@ int _printf(const char *format, ...)
 	print_count = 0;
 	for (i = 0; (format != NULL) && (format[i] != '\0'); i++)
 	{
-		s_input = is_spec(spacifiers, (char *) (format + i));
+		s_index = is_specifier(spacifiers, (char *) (format + i));
 
-		if (s_input == -2)
+		if (s_index == -2)
 		{
 			write(STDOUT_FILENO, (char *) (format + i), 1);
 			print_count++;
 		}
-		else if (s_input == -1)
+		else if (s_index == -1)
 		{
 			return (-1);
 		}
 		else
 		{
-			print_count = print_count + spacifiers[s_input].f(l);
+			print_count = print_count + spacifiers[s_index].f(l);
 			i++;
 		}
 	}
