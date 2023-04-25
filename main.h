@@ -17,7 +17,7 @@ typedef struct specifier
 	char s;
 	int (*f)(va_list args);
 } specifier_t;
-int print_hex(va_list ap);
+int print_hex(va_list l);
 int _printf(const char *format, ...);
 int is_spec(specifier_t spacifiers[], char *format);
 int print_spec(va_list l);
