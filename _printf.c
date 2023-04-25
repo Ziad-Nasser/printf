@@ -94,7 +94,7 @@ int _printf(const char *format, ...)
 	print_count = 0;
 	for (i = 0; (format != NULL) && (format[i] != '\0'); i++)
 	{
-		s_index = is_specifier(spacifiers, (char *) (format + i));
+		s_index = is_spec(spacifiers, (char *) (format + i));
 
 		if (s_index == -2)
 		{

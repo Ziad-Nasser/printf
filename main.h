@@ -20,4 +20,5 @@ typedef struct specifier
 int _printf(const char *format, ...);
 int print_int(va_list l);
 int print_binary(va_list l);
+int _putchar(char c);
 #endif
