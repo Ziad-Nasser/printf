@@ -8,32 +8,31 @@
 */
 int print_int(va_list l)
 {
-	int size = 0, num;
+	int size, num;
 	unsigned int number;
 	char c;
 
 	num = va_arg(l, int);
-	if (num < 0)
-	{
-		c = '-';
-		write(STDOUT_FILENO, &c, 1);
-		size = 1;
-		number = c * -1;
-	}
-	else
-		number = num;
-
 	if (num == 0)
 	{
 		c = '0';
 		write(STDOUT_FILENO, &c, 1);
 		return (1);
 	}
+	size = 0;
+	if (num < 0)
+	{
+		c = '-';
+		write(STDOUT_FILENO, &c, 1);
+		size = 1;
+		number = num * -1;
+	}
+	else
+		number = num;
 	num = 1;
 	while ((number / num) > 9)
-	{
 		num *= 10;
-	}
+
 	while (num != 0)
 	{
 		c = '0' + (number / num);
